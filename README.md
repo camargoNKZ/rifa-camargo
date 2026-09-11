@@ -1,29 +1,32 @@
 # Rifa Camargo — Camargo Confeitaria
 
-Site de rifa online criado para dar um empurrão na marca da **Camargo Confeitaria**: uma vitrine bonita, doce (literalmente) e prática para vender números, acompanhar pagamentos e deixar todo mundo sabendo exatamente qual número já tem dono.
+Site de rifa online criado para dar um empurrão na marca da **Camargo Confeitaria**: uma vitrine bonita, doce (literalmente) e prática para vender números, controlar pagamentos e deixar todo mundo sabendo exatamente qual número já tem dono.
 
 ## Por que existe
 
-A ideia nasceu de um projeto a dois: minha namorada tem a confeitaria, e decidimos criar uma rifa para divulgar e alavancar a marca — juntando o útil (movimentar vendas e engajamento) ao agradável (um prêmio doce pra quem participar). Só que rifa "no grupo de WhatsApp com print de comprovante" vira bagunça rápido: ninguém sabe quais números já foram vendidos, quem pagou e quem só reservou. Este site existe para resolver exatamente isso, com registro claro de cada número, do interessado e da confirmação do pagamento.
+A ideia nasceu de um projeto a dois: minha namorada tem a confeitaria, e decidimos criar uma rifa para divulgar e alavancar a marca — juntando o útil (movimentar vendas e engajamento) ao agradável (um prêmio doce pra quem participar). Rifa "no grupo de WhatsApp com print de comprovante" vira bagunça rápido: ninguém sabe quais números já foram vendidos, quem pagou e quem só reservou. Este site existe para resolver exatamente isso.
 
 ## O que a aplicação faz
 
-- **Grade de números da rifa**: exibe os números disponíveis para participação, com identificação visual de quais já estão reservados e quais já foram pagos.
-- **Busca rápida**: permite localizar um número específico ou pelo nome de quem já reservou, direto na grade.
-- **Registro de participante por número**: cada número reservado guarda nome e telefone de contato de quem escolheu, para acompanhamento pela confeitaria.
-- **Confirmação de pagamento**: sinalização clara de status "pago" x "reservado, aguardando pagamento", para validar rapidamente quem já concluiu a compra do número.
-- **Identidade visual própria**: página com a marca "Rifa doce" da Camargo Confeitaria, prêmio em destaque e visual pensado para ser compartilhado nas redes sociais e no WhatsApp.
+- **Grade de 100 números**: mostra em tempo real quais números estão livres, reservados ou pagos, com contadores no topo da página.
+- **Busca e filtro**: encontre um número específico ou filtre por status (livres / reservados / pagos).
+- **Reserva pelo site**: a pessoa escolhe um ou mais números livres, informa nome e WhatsApp, e escolhe se quer ser atendida por **Lívia** ou **Guilherme** — a reserva fica registrada na hora, direto no painel de gestão.
+- **Pagamento via PIX**: QR Code de pagamento exibido para facilitar a confirmação do valor de cada número.
+- **Painel de gestão (`/gestao`)**: área autenticada por senha (login em `/login`) onde é possível ver todas as reservas, marcar/desmarcar números como pagos, liberar um número e conferir os dados de contato de cada comprador.
+- **Sorteio no Instagram**: o resultado é divulgado no perfil `@camargoconfeitaria_`.
 
-## Status atual
+## Como funciona por trás
 
-O controle de pagamentos já é feito manualmente por nós (eu e minha namorada): quem reserva um número precisa nos enviar o comprovante diretamente, e a confirmação de "pago" é atualizada a partir disso. Foi uma escolha consciente não implementar um checkout de pagamento integrado ao site — para o volume de uma rifa entre conhecidos, isso seria complexidade desnecessária.
-
-O que ainda falta amarrar é o próprio direcionamento do comprovante pelo site: hoje não existe, na página, um caminho claro (ex.: um botão/link de WhatsApp) para a pessoa nos enviar o comprovante depois de escolher o número — esse é o próximo ajuste do projeto.
+- **Front-end** estático (HTML/CSS/JS puro, sem framework) — leve e rápido de carregar no celular.
+- **API serverless na Vercel** (`/api/reserve`, `/api/raffle`, `/api/login`, `/api/logout`) cuidando de reservas, listagem de status e autenticação do painel.
+- **Autenticação do painel** feita com senha (hash + comparação segura) e cookie de sessão assinado (HMAC), sem exposição da senha em texto puro.
+- **Armazenamento em Vercel Blob**: cada reserva/pagamento é salvo como um snapshot em JSON no Blob Storage do projeto — não depende de banco de dados externo.
 
 ## Stack técnica
 
-- **Next.js** + **React 19**
-- **Tailwind CSS** + componentes baseados em **shadcn/ui**
+- HTML, CSS e JavaScript vanilla
+- Vercel Serverless Functions (Node.js)
+- `@vercel/blob` para persistência dos dados
 - Deploy contínuo na **Vercel**
 
 ## Contexto

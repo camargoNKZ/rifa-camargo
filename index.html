@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8e164e">
+  <meta name="description" content="Rifa Doce da Camargo Confeitaria: concorra a doces à sua escolha, até o limite total de R$ 300.">
+  <title>Consultar Rifa Doce | Camargo Confeitaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-mode="consulta">
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">♥</div><div><strong>Rifa doce</strong><span>Camargo Confeitaria</span></div></div>
+      <span class="prize">R$ 10 por número · Doces de até R$ 300</span>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">✦ Consulta da rifa</p>
+        <h1>Escolha seu número</h1>
+        <p class="subtitle"><strong>Cada número custa R$ 10.</strong> Selecione um ou vários números livres para reservar.</p>
+        <p class="prize-message">♥ Prêmio: doces à escolha do ganhador, até o limite total de R$ 300 — quantos couberem no orçamento.</p>
+        <a class="instagram-link" href="https://www.instagram.com/camargoconfeitaria_?stkn=bDNsYWQ5MzVxdHly&amp;utm_source=qr" target="_blank" rel="noopener noreferrer">
+          <span class="instagram-icon" aria-hidden="true">◎</span>
+          <span><strong>Sorteio no Instagram</strong><small>Acompanhe pelo perfil @camargoconfeitaria_</small></span>
+        </a>
+      </div>
+      <div class="stats" aria-label="Resumo da rifa">
+        <article class="stat stat-free"><strong id="freeCount">100</strong><span>Livres</span></article>
+        <article class="stat stat-reserved"><strong id="reservedCount">0</strong><span>Reservados</span></article>
+        <article class="stat stat-paid"><strong id="paidCount">0</strong><span>Pagos</span></article>
+      </div>
+    </section>
+
+    <section class="toolbar public-toolbar" aria-label="Busca">
+      <label class="search"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Buscar um número" inputmode="numeric" autocomplete="off"></label>
+    </section>
+
+    <section class="filter-row">
+      <div class="filters" role="group" aria-label="Filtrar números">
+        <button class="filter active" data-filter="all" type="button">Todos</button>
+        <button class="filter" data-filter="free" type="button">Livres</button>
+        <button class="filter" data-filter="reserved" type="button">Reservados</button>
+        <button class="filter" data-filter="paid" type="button">Pagos</button>
+      </div>
+      <div class="legend" aria-label="Legenda"><span><i class="dot free"></i>Livre</span><span><i class="dot reserved"></i>Reservado</span><span><i class="dot paid"></i>Pago</span></div>
+    </section>
+
+    <section id="numbersGrid" class="numbers-grid consultation-grid" aria-label="Números da rifa"></section>
+    <p id="emptyState" class="empty" hidden>Nenhum número corresponde à busca.</p>
+    <section id="selectionBar" class="selection-bar" aria-live="polite" hidden>
+      <div><strong><span id="selectionCount">0</span> selecionado(s) · <span id="selectionTotal">R$ 0</span></strong><small id="selectionNumbers"></small></div>
+      <div class="selection-actions"><button id="clearSelection" class="button button-light" type="button">Limpar</button><button id="openReservation" class="button button-primary" type="button">Continuar reserva</button></div>
+    </section>
+    <p class="public-note">Toque nos números livres que deseja, confira o total e continue. A reserva será enviada pelo WhatsApp e aparecerá no painel de gestão. O sorteio acontecerá no Instagram da Camargo Confeitaria.</p>
+  </main>
+
+  <dialog id="requestDialog" class="dialog request-dialog">
+    <form id="requestForm" method="dialog">
+      <button class="close" id="closeRequest" type="button" aria-label="Fechar">×</button>
+      <section id="requestDetails">
+        <p class="dialog-kicker">Reservar número</p>
+        <h2>Números <span id="requestNumbers">01</span></h2>
+        <p class="reservation-total">Total: <strong id="requestTotal">R$ 10</strong></p>
+        <label>Seu nome<input id="requestName" required maxlength="80" placeholder="Ex.: Maria Silva" autocomplete="name"></label>
+        <label>Seu WhatsApp<input id="requestPhone" required maxlength="24" placeholder="(00) 00000-0000" inputmode="tel" autocomplete="tel"></label>
+        <p class="request-hint">Escolha com quem falar. O número entrará como reservado no painel e o WhatsApp abrirá com a mensagem pronta para envio.</p>
+        <div class="contact-actions request-contacts" aria-label="Escolher contato para reservar">
+          <button class="contact-button contact-livia" data-reservation-contact="livia" type="button"><span><small>WhatsApp</small>Reservar com Lívia</span></button>
+          <button class="contact-button contact-guilherme" data-reservation-contact="guilherme" type="button"><span><small>WhatsApp</small>Reservar com Guilherme</span></button>
+        </div>
+      </section>
+
+      <section id="paymentStep" class="payment-step" hidden>
+        <p class="dialog-kicker">Reserva realizada</p>
+        <h2>Reserva dos números <span id="reservedNumbers">01</span></h2>
+        <p class="payment-intro">Envie a mensagem que foi aberta no WhatsApp, faça o Pix de <strong id="paymentTotal">R$ 10</strong> e mande o comprovante na mesma conversa. A gestão confirmará o pagamento no site.</p>
+        <div class="payment-grid">
+          <div>
+            <div class="pix-code-box">
+              <span>Pix Copia e Cola</span>
+              <code id="pixCode">00020101021126580014br.gov.bcb.pix0136dc0a8555-da22-46a6-8f57-e1715a061edf5204000053039865802BR5919GUILHERME C MARTINS6006ARARAS62070503***63040FEB</code>
+            </div>
+            <button id="copyPixButton" class="button button-primary pix-copy-button" type="button">Copiar código Pix</button>
+          </div>
+          <div class="pix-qr compact-qr">
+            <img src="./pix-qrcode.png" alt="QR Code Pix para pagamento da rifa" width="338" height="338">
+            <span>Aponte a câmera do celular</span>
+          </div>
+        </div>
+        <a id="reopenWhatsapp" class="contact-button contact-livia reopen-whatsapp" href="#" target="_blank" rel="noopener noreferrer"><span><small>Reserva e comprovante</small>Abrir WhatsApp novamente</span></a>
+        <button id="finishReservation" class="button button-light finish-reservation" type="button">Concluir</button>
+      </section>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>

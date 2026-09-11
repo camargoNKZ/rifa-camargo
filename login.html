@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8e164e">
+  <meta name="description" content="Acesso ao painel de gestão da Rifa Doce.">
+  <title>Entrar na gestão | Rifa Doce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="login-page">
+  <main class="login-shell">
+    <a class="back-link" href="./">← Voltar para consulta</a>
+    <section class="login-card">
+      <div class="brand-mark login-mark" aria-hidden="true">♥</div>
+      <p class="eyebrow">Painel de gestão</p>
+      <h1>Bem-vinda</h1>
+      <p class="subtitle">Digite a senha administrativa para continuar.</p>
+      <form id="loginForm" class="login-form">
+        <label>Senha<input id="passwordInput" type="password" required autocomplete="current-password" placeholder="Sua senha"></label>
+        <p id="loginError" class="form-error" role="alert" hidden></p>
+        <button id="loginButton" class="button button-primary" type="submit">Entrar na gestão</button>
+      </form>
+    </section>
+  </main>
+  <script src="./login.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8e164e">
+  <meta name="description" content="Painel para gerenciar os números e compradores da Rifa Doce.">
+  <title>Gestão da Rifa Doce | Camargo Confeitaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-mode="gestao">
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">♥</div><div><strong>Rifa doce</strong><span>Camargo Confeitaria</span></div></div>
+      <div class="top-actions"><a class="button button-light top-link" href="./">Ver consulta</a><button class="button button-light" id="logoutButton" type="button">Sair</button></div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">✦ Painel de gestão</p>
+        <h1>Números e compradores</h1>
+        <p class="subtitle">As reservas feitas pelo WhatsApp aparecem aqui. Toque em um número para validar o comprador e confirmar o pagamento.</p>
+      </div>
+      <div class="stats" aria-label="Resumo da rifa">
+        <article class="stat stat-free"><strong id="freeCount">100</strong><span>Livres</span></article>
+        <article class="stat stat-reserved"><strong id="reservedCount">0</strong><span>Reservados</span></article>
+        <article class="stat stat-paid"><strong id="paidCount">0</strong><span>Pagos</span></article>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Ferramentas">
+      <label class="search"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Buscar por número ou comprador" autocomplete="off"></label>
+      <div class="toolbar-actions">
+        <button class="button button-light" id="exportCsv" type="button">Exportar lista</button>
+        <button class="button button-light" id="backupJson" type="button">Salvar backup</button>
+        <label class="button button-light file-button">Restaurar backup<input id="restoreJson" type="file" accept="application/json"></label>
+      </div>
+    </section>
+
+    <section class="filter-row">
+      <div class="filters" role="group" aria-label="Filtrar números">
+        <button class="filter active" data-filter="all" type="button">Todos</button>
+        <button class="filter" data-filter="free" type="button">Livres</button>
+        <button class="filter" data-filter="reserved" type="button">Reservados</button>
+        <button class="filter" data-filter="paid" type="button">Pagos</button>
+      </div>
+      <div class="legend" aria-label="Legenda"><span><i class="dot free"></i>Livre</span><span><i class="dot reserved"></i>Reservado</span><span><i class="dot paid"></i>Pago</span></div>
+    </section>
+
+    <section id="numbersGrid" class="numbers-grid" aria-label="Números da rifa"></section>
+    <p id="emptyState" class="empty" hidden>Nenhum número corresponde à busca.</p>
+    <p class="storage-note">As reservas são atualizadas automaticamente. Depois de validar o comprovante pelo WhatsApp, abra o número e marque “Pagamento confirmado”.</p>
+  </main>
+
+  <dialog id="entryDialog" class="dialog">
+    <form id="entryForm" method="dialog">
+      <button class="close" id="closeDialog" type="button" aria-label="Fechar">×</button>
+      <p class="dialog-kicker">Cadastro do comprador</p>
+      <h2>Número <span id="dialogNumber">01</span></h2>
+      <input id="numberInput" type="hidden">
+      <p id="reservationMeta" class="reservation-meta" hidden></p>
+      <label>Nome do comprador<input id="nameInput" required maxlength="80" placeholder="Ex.: Maria Silva" autocomplete="name"></label>
+      <label>Telefone<input id="phoneInput" maxlength="24" placeholder="(00) 00000-0000" inputmode="tel" autocomplete="tel"></label>
+      <a id="buyerWhatsapp" class="button buyer-whatsapp" href="#" target="_blank" rel="noopener noreferrer" hidden>Falar com o comprador no WhatsApp</a>
+      <label class="paid-check"><input id="paidInput" type="checkbox"><span>Pagamento confirmado</span></label>
+      <div class="dialog-actions"><button id="deleteEntry" class="button button-danger" type="button">Liberar número</button><button class="button button-primary" type="submit">Salvar cadastro</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
