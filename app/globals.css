@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  --background: #fffaf5;
+  --foreground: #3f1830;
+  --card: #fffefe;
+  --card-foreground: #3f1830;
+  --popover: #fffefe;
+  --popover-foreground: #3f1830;
+  --primary: #8e164e;
+  --primary-foreground: #fff8fb;
+  --secondary: #fde7ee;
+  --secondary-foreground: #70113d;
+  --muted: #f9eee8;
+  --muted-foreground: #725466;
+  --accent: #f5a0b8;
+  --accent-foreground: #51102f;
+  --destructive: #c52e48;
+  --border: #ecd6df;
+  --input: #e6cad6;
+  --ring: #d85888;
+  --radius: 0.8rem;
+}
+
+.dark {
+  --background: #28101e;
+  --foreground: #fff5f8;
+  --card: #351426;
+  --card-foreground: #fff5f8;
+  --popover: #351426;
+  --popover-foreground: #fff5f8;
+  --primary: #f3a0ba;
+  --primary-foreground: #3d1028;
+  --secondary: #55203b;
+  --secondary-foreground: #fff2f6;
+  --muted: #431a30;
+  --muted-foreground: #d9b7c6;
+  --accent: #8e164e;
+  --accent-foreground: #fff5f8;
+  --destructive: #ff7187;
+  --border: #64314a;
+  --input: #70405a;
+  --ring: #f3a0ba;
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { @apply font-sans; }
+  body { @apply bg-background text-foreground; }
+  button { @apply cursor-pointer; }
+}
+
+.font-display { font-family: var(--font-display), sans-serif; }
