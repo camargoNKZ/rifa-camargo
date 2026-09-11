@@ -16,7 +16,9 @@ A ideia nasceu de um projeto a dois: minha namorada tem a confeitaria, e decidim
 
 ## Status atual
 
-Esta é a primeira versão da plataforma, com o front-end da vitrine de números já funcionando. O fluxo de registro e validação de pagamentos é o próximo passo da evolução do projeto — a base de dados e a tela de confirmação de pagamentos entram nas próximas versões.
+O controle de pagamentos já é feito manualmente por nós (eu e minha namorada): quem reserva um número precisa nos enviar o comprovante diretamente, e a confirmação de "pago" é atualizada a partir disso. Foi uma escolha consciente não implementar um checkout de pagamento integrado ao site — para o volume de uma rifa entre conhecidos, isso seria complexidade desnecessária.
+
+O que ainda falta amarrar é o próprio direcionamento do comprovante pelo site: hoje não existe, na página, um caminho claro (ex.: um botão/link de WhatsApp) para a pessoa nos enviar o comprovante depois de escolher o número — esse é o próximo ajuste do projeto.
 
 ## Stack técnica
 
